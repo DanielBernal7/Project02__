@@ -48,6 +48,10 @@ public class AppRepository {
         return null;
     }
 
+    public LiveData<User> getUserByUserName(String username) {
+        return userDAO.getUserByUserName(username);
+    }
+
 
 
     public void insertUser(User... user){

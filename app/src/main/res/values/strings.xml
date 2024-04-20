@@ -9,4 +9,8 @@
     <string name="user_id">User ID:</string>
     <string name="password">Password:</string>
     <string name="loginButton">Login!</string>
+    <string name="username">Username</string>
+    <string name="orders">Orders</string>
+    <string name="cart">Cart</string>
+    <string name="admin">Admin</string>
 </resources>

@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.DatabaseConfiguration;
 import androidx.room.InvalidationTracker;
 import androidx.room.RoomDatabase;
-import androidx.room.SQLiteCopyOpenHelper;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import com.example.project02_.database.AppDatabase;

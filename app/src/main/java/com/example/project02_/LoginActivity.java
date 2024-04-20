@@ -6,8 +6,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import com.example.project02_.database.AppRepository;
+import com.example.project02_.database.entities.User;
 import com.example.project02_.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
@@ -34,8 +36,10 @@ public class LoginActivity extends AppCompatActivity {
                 String username = userNameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
+
             }
         });
 
     }
+
 }
