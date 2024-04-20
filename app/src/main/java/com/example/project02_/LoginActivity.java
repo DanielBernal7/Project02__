@@ -42,14 +42,12 @@ public class LoginActivity extends AppCompatActivity {
                     if(user != null){
                         if(password.equals(user.getPassword()) && username.equals(user.getUsername())){
                             Intent intent = new Intent(LoginActivity.this, LandingPage.class);
-                            if(user.isAdmin()){
-                                intent.putExtra("IS_ADMIN_KEY", true);
-                            }
                             intent.putExtra("USER_NAME_KEY", username);
                             SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
                             SharedPreferences.Editor editor = prefs.edit();
                             editor.putBoolean("isLoggedIn", true);
                             editor.putString("username", username);
+                            editor.putBoolean("isAdmin", user.isAdmin());
                             editor.apply();
                             startActivity(intent);
                         }

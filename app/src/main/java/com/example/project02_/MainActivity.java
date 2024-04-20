@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
         boolean isLoggedIn = prefs.getBoolean("isLoggedIn", false);
@@ -50,13 +51,20 @@ public class MainActivity extends AppCompatActivity {
         repository = AppRepository.getRepository(getApplication());
 
         Button logIn = findViewById(R.id.loginButtonInFrontPage);
-        logIn.setOnClickListener(new View.OnClickListener() {
+        binding.loginButtonInFrontPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
+//        logIn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
 //        db = AppDatabase.getDatabase(getApplicationContext());
 //        UserDAO userDao = db.userDAO();

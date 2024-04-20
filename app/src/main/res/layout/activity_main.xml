@@ -30,8 +30,8 @@
         android:backgroundTint="#8781B8"
         android:gravity="center"
         android:text="@string/login"
-        android:textStyle="bold"
         android:textSize="33sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleForLoginSignUp" />
@@ -44,8 +44,8 @@
         android:backgroundTint="#8781B8"
         android:gravity="center"
         android:text="@string/sign_up"
-        android:textStyle="bold"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/loginButtonInFrontPage" />

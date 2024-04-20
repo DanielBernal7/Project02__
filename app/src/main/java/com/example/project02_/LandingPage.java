@@ -35,18 +35,21 @@ public class LandingPage extends AppCompatActivity {
         Intent intent = getIntent();
 
         TextView usernameTextView = findViewById(R.id.usernameTextView);
-        boolean isAdmin = intent.getBooleanExtra("IS_ADMIN_KEY", true);
-
-        if(isAdmin){
-            adminB.setVisibility(View.INVISIBLE);
-        }
 
         SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "user");
-//        String username = intent.getStringExtra("USER_NAME_KEY");
         if(!username.isEmpty()){
             usernameTextView.setText(username);
         }
+
+        boolean isAdmin = sharedPreferences.getBoolean("isAdmin", false);
+
+        if(!isAdmin){
+            adminB.setVisibility(View.INVISIBLE);
+        } else {
+            adminB.setVisibility(View.VISIBLE);
+        }
+
 
         logoutB.setOnClickListener(new View.OnClickListener() {
             @Override
