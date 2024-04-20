@@ -1,5 +1,6 @@
 package com.example.project02_.database.entities;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,14 +9,15 @@ import java.util.Objects;
 @Entity(tableName = "users")
 public class User {
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    private int id;
+    private String username;
+    private String password;
+    private boolean isAdmin;
 
-    public String username;
-    public String password;
-    public boolean isAdmin;
-
-    public User(){
-
+    public User(String username, String password) {
+//        this.id = id;
+        this.username = username;
+        this.password = password;
     }
 
     @Override
