@@ -2,6 +2,7 @@ package com.example.project02_;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,17 +28,24 @@ import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
     private AppRepository repository;
-
     private ActivityMainBinding binding;
-
     private AppDatabase db;
-    private static int loggedIn  = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+
+        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        boolean isLoggedIn = prefs.getBoolean("isLoggedIn", false);
+
+
+        if(isLoggedIn){
+            startActivity(new Intent(this, LandingPage.class));
+            finish();
+        } else {
+            setContentView(binding.getRoot());
+        }
 
         repository = AppRepository.getRepository(getApplication());
 
