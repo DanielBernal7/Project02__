@@ -1,5 +1,6 @@
 package com.example.project02_;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +36,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = userNameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-
+                LiveData<User> userObserver = repository.getUserByUserName(username);
+                userObserver.observe(LoginActivity.this,user -> {
+                    if(user != null){
+                        if(password.equals(user.getPassword()) && username.equals(user.getUsername())){
+                            Intent intent = new Intent(LoginActivity.this, LandingPage.class);
+                            if(user.isAdmin()){
+                                intent.putExtra("IS_ADMIN_KEY", true);
+                            }
+                            intent.putExtra("USER_NAME_KEY", username);
+                            startActivity(intent);
+                        }
+                    }
+                });
 
             }
         });
