@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 //        logIn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
