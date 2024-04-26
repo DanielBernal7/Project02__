@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.project02_.database.entities.Product;
 import com.example.project02_.database.entities.User;
 
 import java.util.Collections;
@@ -18,6 +19,7 @@ import java.util.concurrent.Future;
 
 public class AppRepository {
     private final UserDAO userDAO;
+    private final ProductDAO productDAO;
 
     private static AppRepository repository;
 
@@ -25,6 +27,7 @@ public class AppRepository {
         AppDatabase db = AppDatabase.getDatabase(application);
         this.userDAO = db.userDAO();
         userDAO.getUserById(1);
+        this.productDAO = db.productDAO();
     }
 
     public static AppRepository getRepository(Application application){
@@ -60,16 +63,10 @@ public class AppRepository {
         });
     }
 
+    public void insertProduct(Product... product){
+        AppDatabase.databaseWriteExecutor.execute(()->{
+            productDAO.insert(product);
+        });
+    }
 
-    // LiveData method to get all users
-//    public LiveData<List<User>> getAllUsers() {
-//        return userDAO.get();
-//    }
-
-//    public void insertTestData() {
-//        executor.execute(() -> {
-//            userDAO.insert(new User("testuser1", "testpass1", false));
-//            userDAO.insert(new User("admin2", "adminpass2", true));
-//        });
-//    }
 }
