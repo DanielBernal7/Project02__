@@ -12,11 +12,13 @@ public class Product {
     private String name;
     private double price;
     private String description;
+    private String type;
 
-    public Product(String name, double price, String description) {
+    public Product(String name, double price, String description, String type) {
         this.name = name;
         this.price = price;
         this.description = description;
+        this.type = type;
     }
 
     @Override
@@ -24,12 +26,20 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id && Double.compare(price, product.price) == 0 && Objects.equals(name, product.name) && Objects.equals(description, product.description);
+        return id == product.id && Double.compare(price, product.price) == 0 && Objects.equals(name, product.name) && Objects.equals(description, product.description) && Objects.equals(type, product.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, description);
+        return Objects.hash(id, name, price, description, type);
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getId() {

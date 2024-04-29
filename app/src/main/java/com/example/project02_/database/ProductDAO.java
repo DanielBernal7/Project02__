@@ -14,7 +14,10 @@ public interface ProductDAO {
     void insert(Product... product);
 
     @Query("SELECT * FROM products WHERE id = :id")
-    Product getUserById(int id);
+    Product geProductById(int id);
+
+    @Query("SELECT * FROM products WHERE type = :type")
+    Product getProductByType(int type);
 
     @Query("SELECT * FROM products WHERE name = :name")
     Product getProductByName(String name);

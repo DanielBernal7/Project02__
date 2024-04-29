@@ -15,7 +15,7 @@ import com.example.project02_.database.entities.User;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Product.class}, version = 9, exportSchema = false)
+@Database(entities = {User.class, Product.class}, version = 10, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDAO userDAO();
     public abstract ProductDAO productDAO();
@@ -62,7 +62,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
                 ProductDAO dao2 = INSTANCE.productDAO();
                 dao2.deleteAll();
-                Product testProduct = new Product("TestProduct", 30.00, "This is a test product");
+                Product testProduct = new Product("TestProduct", 30.00, "This is a test product", "TV");
                 dao2.insert(testProduct);
             });
         }
