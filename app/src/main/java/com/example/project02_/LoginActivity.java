@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -51,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
                             editor.apply();
                             startActivity(intent);
                         }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "UserID/Password is incorrect try again", Toast.LENGTH_LONG).show();
                     }
                 });
 

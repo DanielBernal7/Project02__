@@ -18,6 +18,7 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 import com.example.project02_.database.AppDatabase;
 import com.example.project02_.database.AppRepository;
 import com.example.project02_.database.UserDAO;
+import com.example.project02_.database.entities.Product;
 import com.example.project02_.database.entities.User;
 import com.example.project02_.databinding.ActivityMainBinding;
 
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         repository = AppRepository.getRepository(getApplication());
+//        assert repository != null; I need to remember to user this or it might break my code
+
 
         Button logIn = findViewById(R.id.loginButtonInFrontPage);
         binding.loginButtonInFrontPage.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 //        logIn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

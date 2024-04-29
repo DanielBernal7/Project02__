@@ -66,5 +66,13 @@ public class LandingPage extends AppCompatActivity {
             }
         });
 
+        Button bSearch = findViewById(R.id.searchButton);
+        bSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 }
