@@ -58,6 +58,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button signUp = findViewById(R.id.signUpButtonInFrontPage);
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
+
 //        logIn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

@@ -14,4 +14,8 @@
     <string name="cart">Cart</string>
     <string name="admin">Admin</string>
     <string name="logout">logout</string>
+    <string name="enter_a_username">Enter a username</string>
+    <string name="passwordStatic">Password:</string>
+    <string name="enter_a_password">Enter a password</string>
+    <string name="create">Create</string>
 </resources>
