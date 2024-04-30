@@ -55,6 +55,18 @@ public class AppRepository {
         return userDAO.getUserByUserName(username);
     }
 
+    public User getUserByUsernameDirectly(String username) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<User> future = executor.submit(() -> userDAO.getUserByUsernameDirectly(username));
+
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
 
     public void insertUser(User... user){
