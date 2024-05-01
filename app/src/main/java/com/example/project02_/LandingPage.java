@@ -74,5 +74,14 @@ public class LandingPage extends AppCompatActivity {
             }
         });
 
+        Button bAdmin = findViewById(R.id.adminButton);
+        bAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LandingPage.this, AdminPageActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

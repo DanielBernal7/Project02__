@@ -75,10 +75,18 @@ public class AppRepository {
         });
     }
 
+    public LiveData<List<User>> getAllUsers(){
+        return userDAO.getAllUsers();
+    }
+
     public void insertProduct(Product... product){
         AppDatabase.databaseWriteExecutor.execute(()->{
             productDAO.insert(product);
         });
+    }
+
+    public void deleteUser(User user){
+        Executors.newSingleThreadExecutor().execute(()-> userDAO.deleteUser(user));
     }
 
 }
