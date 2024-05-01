@@ -17,4 +17,7 @@ public interface ItemDAO {
 
     @Query("SELECT * FROM items")
     LiveData<List<Item>> getAllItems();
+
+    @Query("DELETE FROM items")
+    void deleteAll(); // Add this method to delete all items
 }

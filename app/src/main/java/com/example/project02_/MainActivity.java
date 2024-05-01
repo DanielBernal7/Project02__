@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.project02_.database.AppDatabase;
 import com.example.project02_.database.entities.Item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void populateDatabase() {
         new Thread(() -> {
-            for (int i = 0; i < 20; i++) {
-                String name = "Item " + i;
-                double price = Math.random() * 100;
-                String description = "Description for Item " + i;
-                Item item = new Item(name, price, description);
-                AppDatabase.getInstance(this).itemDAO().insert(item);
+            // Delete all existing items from the database
+            AppDatabase.getInstance(this).itemDAO().deleteAll();
+
+            List<Item> items = createUniqueItems(); // Create a list of unique items
+            for (Item item : items) {
+                AppDatabase.getInstance(this).itemDAO().insert(item); // Insert each item into the database
             }
         }).start();
     }
@@ -51,4 +52,20 @@ public class MainActivity extends AppCompatActivity {
             itemAdapter.setItemList(items);
         });
     }
+    private List<Item> createUniqueItems() {
+        List<Item> items = new ArrayList<>();
+        items.add(new Item("Smartwatch", 99.99, "Stay connected and track your fitness with this sleek smartwatch."));
+        items.add(new Item("Wireless Earbuds", 49.99, "Enjoy crystal-clear sound and wireless freedom with these Bluetooth earbuds."));
+        items.add(new Item("Laptop Backpack", 39.99, "Carry your laptop and essentials with ease in this durable backpack."));
+        items.add(new Item("Wireless Charging Pad", 29.99, "Charge your compatible devices wirelessly with this convenient charging pad."));
+        items.add(new Item("Resistance Bands Set", 19.99, "Work out from home with this versatile set of resistance bands."));
+        items.add(new Item("Nuclear Bomb", 999.99, "Demolish your enemies with the power of the atom. Quite the powerhouse!"));
+        items.add(new Item("Bookshelf", 34.69, "Work out from home with this versatile set of resistance bands."));
+        items.add(new Item("Pillow 2-Pack", 5.99, "2 Pillows for the price of one! What a comforting deal!"));
+        items.add(new Item("Plastic Food Containers set", 30.99, "An entire set of containers to hold your food storage, coming in a variety of sizes."));
+        items.add(new Item("Ugly Stik 8' Fishing Pole", 80.99, "The toughest and most durable rod in america. No fish is un-catchable with this in your hands."));
+
+        return items;
+    }
 }
+

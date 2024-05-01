@@ -40,9 +40,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Item item = itemList.get(position);
         holder.nameTextView.setText(item.getName());
-        holder.idTextView.setText(String.valueOf(item.getId()));
-        holder.priceTextView.setText(String.valueOf(item.getPrice()));
-        holder.descriptionTextView.setText(item.getDescription());
+        holder.priceTextView.setText(String.format("PRICE: $%.2f", item.getPrice()));
+        holder.idTextView.setText(String.format("ID: %d", item.getId()));
+        holder.descriptionTextView.setText(String.format("DESCRIPTION: %s", item.getDescription()));
     }
 
     @Override
