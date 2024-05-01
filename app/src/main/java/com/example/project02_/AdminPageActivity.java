@@ -19,28 +19,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminPageActivity extends AppCompatActivity {
-    AppRepository repository;
+    private AppRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
-
+        AppRepository repository = AppRepository.getRepository(getApplication());
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         List<User> emptyList = new ArrayList<>();
-        UserAdapter adapter = new UserAdapter(emptyList);
+        UserAdapter adapter = new UserAdapter(emptyList, user -> deleteUser(user, repository));
         recyclerView.setAdapter(adapter);
 
-        AppRepository repository = AppRepository.getRepository(getApplication());
+
 
         UserViewModel viewModel = new ViewModelProvider(this, new UserViewModelFactory(repository)).get(UserViewModel.class);
 
         viewModel.getAllUsers().observe(this, users -> adapter.updateUsers(users));
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+//        recyclerView.addItemDecoration(dividerItemDecoration);
+    }
+
+    private void deleteUser(User user, AppRepository repository){
+        if(repository != null){
+            repository.deleteUser(user);
+        } else {
+            System.out.println("Repository is null");
+        }
     }
 }

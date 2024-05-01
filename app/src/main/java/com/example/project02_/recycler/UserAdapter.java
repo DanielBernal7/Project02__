@@ -1,14 +1,16 @@
 // In UserAdapter.java
 package com.example.project02_.recycler;
 
+import android.nfc.Tag;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project02_.R;
+import com.example.project02_.R;  // Ensure proper imports
 import com.example.project02_.database.entities.User;
 
 import java.util.List;
@@ -16,9 +18,11 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
     private List<User> users;
+    private final DeleteUserListener deleteUserListener;
 
-    public UserAdapter(List<User> users) {
+    public UserAdapter(List<User> users, DeleteUserListener deleteUserListener) {
         this.users = users;
+        this.deleteUserListener = deleteUserListener;
     }
 
     @NonNull
@@ -33,6 +37,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         User user = users.get(position);
         holder.userNameTextView.setText(user.getUsername());
         holder.userPasswordTextView.setText(user.getPassword());
+
+//        holder.deleteButton.setOnClickListener(v -> deleteUserListener.onDelete(user));
+
+        holder.deleteButton.setOnClickListener(v -> {
+            try {
+                deleteUserListener.onDelete(user);
+
+                users.remove(position);
+                notifyItemRemoved(position);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override
@@ -48,11 +65,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     static class UserViewHolder extends RecyclerView.ViewHolder {
         final TextView userNameTextView;
         final TextView userPasswordTextView;
+        final Button deleteButton;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             userNameTextView = itemView.findViewById(R.id.userNameTextView);
             userPasswordTextView = itemView.findViewById(R.id.userPasswordTextView);
+            deleteButton = itemView.findViewById(R.id.deleteButton);
         }
+    }
+
+    public interface DeleteUserListener {
+        void onDelete(User user);
     }
 }

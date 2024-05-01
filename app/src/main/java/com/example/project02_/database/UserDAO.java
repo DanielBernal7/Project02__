@@ -2,6 +2,7 @@ package com.example.project02_.database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -15,6 +16,12 @@ import java.util.List;
 public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User... user);
+
+    @Delete
+    void deleteUser(User user);
+
+    @Query("DELETE from users WHERE id = :id")
+    void deleteUserById(int id);
 
     @Query("SELECT * FROM users WHERE id = :id")
     User getUserById(int id);

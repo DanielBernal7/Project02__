@@ -24,7 +24,7 @@
         android:id="@+id/EditTextViewUsername"
         android:layout_width="250dp"
         android:layout_height="32dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="296dp"
         android:background="@drawable/rounded_rectangles"
         android:hint="@string/enter_a_username1"
         android:imeOptions="actionDone"
@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Static_TextViewUserId" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/EditTextPassword"

@@ -24,4 +24,5 @@
     <string name="createButton">Create</string>
     <string name="enter_a_username1">Enter a username</string>
     <string name="password3">Password:</string>
+    <string name="delete">Delete</string>
 </resources>
