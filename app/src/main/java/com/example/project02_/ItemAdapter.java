@@ -1,4 +1,3 @@
-// ItemAdapter.java
 package com.example.project02_;
 
 import android.content.Context;
@@ -8,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project02_.database.entities.Item;
@@ -43,6 +43,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.priceTextView.setText(String.format("PRICE: $%.2f", item.getPrice()));
         holder.idTextView.setText(String.format("ID: %d", item.getId()));
         holder.descriptionTextView.setText(String.format("DESCRIPTION: %s", item.getDescription()));
+
+        // Set click listener for item
+        holder.itemView.setOnClickListener(v -> showAddToCartPopup());
     }
 
     @Override
@@ -60,5 +63,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             priceTextView = itemView.findViewById(R.id.priceTextView);
             descriptionTextView = itemView.findViewById(R.id.descriptionTextView);
         }
+    }
+
+    private void showAddToCartPopup() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Add to Cart")
+                .setMessage("Would you like to add the item to your cart?")
+                .setPositiveButton("ADD TO CART", (dialog, which) -> {
+                    // Add to cart logic here
+                    dialog.dismiss();
+                })
+                .setNegativeButton("Dismiss", (dialog, which) -> dialog.dismiss())
+                .show();
     }
 }

@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         items.add(new Item("Laptop Backpack", 39.99, "Carry your laptop and essentials with ease in this durable backpack."));
         items.add(new Item("Wireless Charging Pad", 29.99, "Charge your compatible devices wirelessly with this convenient charging pad."));
         items.add(new Item("Resistance Bands Set", 19.99, "Work out from home with this versatile set of resistance bands."));
-        items.add(new Item("Nuclear Bomb", 999.99, "Demolish your enemies with the power of the atom. Quite the powerhouse!"));
+        items.add(new Item("Nuclear Bomb", 999.99, "Demolish your enemies with the power of the atom. 100% satisfaction guaranteed!"));
         items.add(new Item("Bookshelf", 34.69, "A nice place to store all your books or other objects of interest that you may have."));
         items.add(new Item("Pillow 2-Pack", 5.99, "2 Pillows for the price of one! What a comforting deal!"));
         items.add(new Item("Plastic Food Containers set", 30.99, "An entire set of containers to hold your food storage, coming in a variety of sizes."));
