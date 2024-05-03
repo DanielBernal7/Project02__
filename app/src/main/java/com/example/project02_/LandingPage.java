@@ -106,10 +106,20 @@ public class LandingPage extends AppCompatActivity {
         });
 
         //This is testing for the cart table and adding items to the cart
-        int userId = 1;
+        int userId = 2;
         List<Integer> productIds = Arrays.asList(1,2);
         List<Integer> quantities = Arrays.asList(3,2);
         repository.addItemsToCart(userId, productIds, quantities);
+
+        Button bCart = findViewById(R.id.cartButton);
+        bCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LandingPage.this, CartActivity.class);
+                intent.putExtra("USER_ID", userId);
+                startActivity(intent);
+            }
+        });
 
 
 //        repository.getProductsAndQuantitiesForUser(1).observe(this, productAndQuantities -> {
