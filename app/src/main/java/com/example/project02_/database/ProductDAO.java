@@ -6,7 +6,10 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.example.project02_.database.embedded.ProductAndQuantity;
 import com.example.project02_.database.entities.Product;
+
+import java.util.List;
 
 @Dao
 public interface ProductDAO {

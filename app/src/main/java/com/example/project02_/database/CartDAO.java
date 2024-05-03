@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.example.project02_.database.embedded.ProductAndQuantity;
 import com.example.project02_.database.entities.Cart;
 import com.example.project02_.database.entities.Product;
 import com.example.project02_.database.entities.User;
@@ -37,6 +38,10 @@ public interface CartDAO {
 
     @Query("DELETE from cart")
     void deleteAll();
+
+    @Query("SELECT p.*, c.quantity FROM products p INNER JOIN cart c ON p.id = c.productId WHERE c.userId = :userId")
+    LiveData<List<ProductAndQuantity>> getProductsAndQuantitiesForUser(int userId);
+
 
 
 }

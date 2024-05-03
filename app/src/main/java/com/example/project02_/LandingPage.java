@@ -15,13 +15,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.project02_.database.AppRepository;
+import com.example.project02_.database.embedded.ProductAndQuantity;
 import com.example.project02_.database.entities.Cart;
 import com.example.project02_.database.entities.Product;
 import com.example.project02_.database.entities.User;
 import com.example.project02_.databinding.ActivityLandingPageBinding;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -102,6 +105,20 @@ public class LandingPage extends AppCompatActivity {
             Product product = repository.getProductById(1);
         });
 
+        //This is testing for the cart table and adding items to the cart
+        int userId = 1;
+        List<Integer> productIds = Arrays.asList(1,2);
+        List<Integer> quantities = Arrays.asList(3,2);
+        repository.addItemsToCart(userId, productIds, quantities);
+
+
+//        repository.getProductsAndQuantitiesForUser(1).observe(this, productAndQuantities -> {
+//            for(ProductAndQuantity paq : productAndQuantities){
+//
+//            }
+//        });
+
+
 //
 //        LiveData<List<Cart>> cartItemsLiveData = repository.getCartItemsForUser(userId.getId());
 //        cartItemsLiveData.observe(this, cartItems -> {
@@ -116,28 +133,28 @@ public class LandingPage extends AppCompatActivity {
 
     }
 
-    public void addItemsToCart(int userId, List<Integer> productIds, List<Integer> quantities) {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-
-        executor.execute(() -> {
-            User user = repository.getUserById(userId);
-            if (user != null) {
-                for (int i = 0; i < productIds.size(); i++) {
-                    Product product = repository.getProductById(productIds.get(i));
-                    if (product != null) {
-                        Cart cartItem = new Cart();
-                        cartItem.setUserId(userId);
-                        cartItem.setProductId(product.getId());
-                        cartItem.setQuantity(quantities.get(i));
-                        repository.insertCartItem(cartItem);
-                    }
-                }
-            }
-            handler.post(() -> {
-                // Optionally update UI here after items are added
-            });
-        });
-    }
+//    public void addItemsToCart(int userId, List<Integer> productIds, List<Integer> quantities) {
+//        ExecutorService executor = Executors.newSingleThreadExecutor();
+//        Handler handler = new Handler(Looper.getMainLooper());
+//
+//        executor.execute(() -> {
+//            User user = repository.getUserById(userId);
+//            if (user != null) {
+//                for (int i = 0; i < productIds.size(); i++) {
+//                    Product product = repository.getProductById(productIds.get(i));
+//                    if (product != null) {
+//                        Cart cartItem = new Cart();
+//                        cartItem.setUserId(userId);
+//                        cartItem.setProductId(product.getId());
+//                        cartItem.setQuantity(quantities.get(i));
+//                        repository.insertCartItem(cartItem);
+//                    }
+//                }
+//            }
+//            handler.post(() -> {
+//                // Optionally update UI here after items are added
+//            });
+//        });
+//    }
 
 }

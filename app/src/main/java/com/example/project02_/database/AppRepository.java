@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.project02_.database.embedded.ProductAndQuantity;
 import com.example.project02_.database.entities.Cart;
 import com.example.project02_.database.entities.Product;
 import com.example.project02_.database.entities.User;
@@ -116,6 +117,26 @@ public class AppRepository {
 
     public User getUserById(int userId) {
         return userDAO.getUserByIdDirectly(userId);
+    }
+
+    public void addItemsToCart(int userId, List<Integer> productId, List<Integer> quantity){
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(()->{
+            User user = userDAO.getUserByIdDirectly(userId);
+            if(user != null){
+                for(int i = 0; i < productId.size(); i++){
+                    Product product = productDAO.getProductById(productId.get(i));
+                    if(product != null){
+                        Cart cartItem = new Cart(user.getId(), product.getId(), quantity.get(i));
+                        cartDAO.insert(cartItem);
+                    }
+                }
+            }
+            executor.shutdown();
+        });
+    }
+    public LiveData<List<ProductAndQuantity>> getProductsAndQuantitiesForUser(int userId) {
+        return cartDAO.getProductsAndQuantitiesForUser(userId);
     }
 
 }
