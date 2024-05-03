@@ -8,6 +8,8 @@ import androidx.room.Query;
 
 import com.example.project02_.database.entities.Product;
 
+import java.util.List;
+
 @Dao
 public interface ProductDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -25,5 +27,7 @@ public interface ProductDAO {
     @Query("DELETE from products")
     void deleteAll();
 
+    @Query("SELECT * FROM products")
+    LiveData<List<Product>> getAllProducts();
 
 }

@@ -12,9 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
+import com.example.project02_.ProductTest;
 import com.example.project02_.database.AppRepository;
 import com.example.project02_.databinding.ActivityLandingPageBinding;
+
+import java.util.prefs.BackingStoreException;
 
 public class LandingPage extends AppCompatActivity {
     private ActivityLandingPageBinding binding;
@@ -70,7 +72,8 @@ public class LandingPage extends AppCompatActivity {
         bSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(LandingPage.this, ProductTest.class);
+                startActivity(intent);
             }
         });
 

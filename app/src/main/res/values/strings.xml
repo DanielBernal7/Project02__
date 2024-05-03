@@ -25,4 +25,5 @@
     <string name="enter_a_username1">Enter a username</string>
     <string name="password3">Password:</string>
     <string name="delete">Delete</string>
+    <string name="list_of_products">LIST OF PRODUCTS</string>
 </resources>

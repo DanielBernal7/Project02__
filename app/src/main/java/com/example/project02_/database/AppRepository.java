@@ -88,5 +88,7 @@ public class AppRepository {
     public void deleteUser(User user){
         Executors.newSingleThreadExecutor().execute(()-> userDAO.deleteUser(user));
     }
-
+    public LiveData<List<Product>> getAllProducts() {
+        return productDAO.getAllProducts();
+    }
 }
