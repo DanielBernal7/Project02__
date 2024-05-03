@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.project02_.database.entities.Cart;
 import com.example.project02_.database.entities.Product;
 import com.example.project02_.database.entities.User;
 
@@ -20,6 +21,7 @@ import java.util.concurrent.Future;
 public class AppRepository {
     private final UserDAO userDAO;
     private final ProductDAO productDAO;
+    private final CartDAO cartDAO;
 
     private static AppRepository repository;
 
@@ -28,6 +30,7 @@ public class AppRepository {
         this.userDAO = db.userDAO();
         userDAO.getUserById(1);
         this.productDAO = db.productDAO();
+        this.cartDAO = db.cartDAO();
     }
 
     public static AppRepository getRepository(Application application){
@@ -85,8 +88,34 @@ public class AppRepository {
         });
     }
 
+    public Product getProductByName(String name){
+        return productDAO.getProductByName(name);
+    }
+
     public void deleteUser(User user){
         Executors.newSingleThreadExecutor().execute(()-> userDAO.deleteUser(user));
+    }
+
+
+    //--------------------------------- Cart ------------------------------------------
+    public LiveData<List<Cart>> getCartItemsForUser(int userId) {
+        return cartDAO.getCartItemsForUser(userId);
+    }
+
+    public void insertCartItem(Cart... cartItems) {
+        AppDatabase.databaseWriteExecutor.execute(() -> cartDAO.insert(cartItems));
+    }
+
+    public void deleteCartItem(Cart cartItem) {
+        AppDatabase.databaseWriteExecutor.execute(() -> cartDAO.deleteCartItem(cartItem));
+    }
+
+    public Product getProductById(int productId) {
+        return productDAO.getProductById(productId);
+    }
+
+    public User getUserById(int userId) {
+        return userDAO.getUserByIdDirectly(userId);
     }
 
 }

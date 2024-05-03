@@ -9,16 +9,18 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.project02_.database.entities.Cart;
 import com.example.project02_.database.entities.Product;
 import com.example.project02_.database.entities.User;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Product.class}, version = 2, exportSchema = false)
+@Database(entities = {User.class, Product.class, Cart.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDAO userDAO();
     public abstract ProductDAO productDAO();
+    public abstract CartDAO cartDAO();
 
 
     public static final String USER_TABLE = "users";
@@ -63,7 +65,9 @@ public abstract class AppDatabase extends RoomDatabase {
                 ProductDAO dao2 = INSTANCE.productDAO();
                 dao2.deleteAll();
                 Product testProduct = new Product("TestProduct", 30.00, "This is a test product", "TV");
+                Product testProduct2 = new Product("TestProduct2", 40.00, "This is a test product", "Phone");
                 dao2.insert(testProduct);
+                dao2.insert(testProduct2);
             });
         }
     };

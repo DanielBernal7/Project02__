@@ -3,6 +3,8 @@ package com.example.project02_;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,9 +14,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.LiveData;
 
 import com.example.project02_.database.AppRepository;
+import com.example.project02_.database.entities.Cart;
+import com.example.project02_.database.entities.Product;
+import com.example.project02_.database.entities.User;
 import com.example.project02_.databinding.ActivityLandingPageBinding;
+
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class LandingPage extends AppCompatActivity {
     private ActivityLandingPageBinding binding;
@@ -83,5 +93,51 @@ public class LandingPage extends AppCompatActivity {
             }
         });
 
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+
+        executor.execute(()->{
+            // Check if the user and product exist before inserting into the cart
+            User user = repository.getUserById(1);
+            Product product = repository.getProductById(1);
+        });
+
+//
+//        LiveData<List<Cart>> cartItemsLiveData = repository.getCartItemsForUser(userId.getId());
+//        cartItemsLiveData.observe(this, cartItems -> {
+//            // Handle the list of cart items
+//        });
+//
+//        // Insert a new cart item
+//        Cart newCartItem = new Cart(userId.getId(), productId.getId());
+//        repository.insertCartItem(newCartItem);
+
+
+
     }
+
+    public void addItemsToCart(int userId, List<Integer> productIds, List<Integer> quantities) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+
+        executor.execute(() -> {
+            User user = repository.getUserById(userId);
+            if (user != null) {
+                for (int i = 0; i < productIds.size(); i++) {
+                    Product product = repository.getProductById(productIds.get(i));
+                    if (product != null) {
+                        Cart cartItem = new Cart();
+                        cartItem.setUserId(userId);
+                        cartItem.setProductId(product.getId());
+                        cartItem.setQuantity(quantities.get(i));
+                        repository.insertCartItem(cartItem);
+                    }
+                }
+            }
+            handler.post(() -> {
+                // Optionally update UI here after items are added
+            });
+        });
+    }
+
 }
