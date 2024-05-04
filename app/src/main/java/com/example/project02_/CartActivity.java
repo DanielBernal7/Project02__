@@ -30,9 +30,7 @@ public class CartActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        int userId = getIntent().getIntExtra("USER_ID", 1);
+        int userId = getIntent().getIntExtra("userId", 1);
         repository.getProductsAndQuantitiesForUser(userId).observe(this, adapter::setItems);
-
-
     }
 }

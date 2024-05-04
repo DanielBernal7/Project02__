@@ -8,29 +8,20 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.project02_.ProductTest;
+
 import com.example.project02_.database.AppRepository;
-import com.example.project02_.database.embedded.ProductAndQuantity;
-import com.example.project02_.database.entities.Cart;
 import com.example.project02_.database.entities.Product;
 import com.example.project02_.database.entities.User;
 import com.example.project02_.databinding.ActivityLandingPageBinding;
+import com.example.project02_.recycler.ProductAdapter;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import java.util.prefs.BackingStoreException;
 
 public class LandingPage extends AppCompatActivity {
     private ActivityLandingPageBinding binding;
@@ -110,40 +101,35 @@ public class LandingPage extends AppCompatActivity {
         });
 
         //This is testing for the cart table and adding items to the cart
-        int userId = 2;
-        List<Integer> productIds = Arrays.asList(1,2);
-        List<Integer> quantities = Arrays.asList(3,2);
+        User user = repository.getUserByUserName("username").getValue();
+        int userId = getUserId();
+//        if(userId != -1){
+//
+//        }
+        List<Integer> productIds = Arrays.asList(1);
+        List<Integer> quantities = Arrays.asList(3);
         repository.addItemsToCart(userId, productIds, quantities);
 
         Button bCart = findViewById(R.id.cartButton);
         bCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("userId", userId);
+                editor.apply();
                 Intent intent = new Intent(LandingPage.this, CartActivity.class);
-                intent.putExtra("USER_ID", userId);
+
+                intent.putExtra("userId", userId);
+
                 startActivity(intent);
             }
         });
 
+    }
 
-//        repository.getProductsAndQuantitiesForUser(1).observe(this, productAndQuantities -> {
-//            for(ProductAndQuantity paq : productAndQuantities){
-//
-//            }
-//        });
-
-
-//
-//        LiveData<List<Cart>> cartItemsLiveData = repository.getCartItemsForUser(userId.getId());
-//        cartItemsLiveData.observe(this, cartItems -> {
-//            // Handle the list of cart items
-//        });
-//
-//        // Insert a new cart item
-//        Cart newCartItem = new Cart(userId.getId(), productId.getId());
-//        repository.insertCartItem(newCartItem);
-
-
-
+    private int getUserId() {
+        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        return prefs.getInt("userId", -1);
     }
 }

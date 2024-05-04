@@ -71,6 +71,20 @@ public class AppRepository {
         }
     }
 
+    public long insertUser(User user){
+        try {
+            Future<Long> future = AppDatabase.databaseWriteExecutor.submit(() -> userDAO.insert(user));
+            return future.get();
+        } catch (InterruptedException e){
+            Thread.currentThread().interrupt();
+            e.printStackTrace();
+            return -1;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
 
 
     public void insertUser(User... user){
