@@ -139,4 +139,7 @@ public class AppRepository {
         return cartDAO.getProductsAndQuantitiesForUser(userId);
     }
 
+    public LiveData<List<Product>> getAllProducts() {
+        return productDAO.getAllProducts();
+    }
 }

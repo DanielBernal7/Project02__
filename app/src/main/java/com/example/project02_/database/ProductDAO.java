@@ -32,5 +32,7 @@ public interface ProductDAO {
     Product getProductById(int id);
 
 
+    @Query("SELECT * FROM products")
+    LiveData<List<Product>> getAllProducts();
 
 }

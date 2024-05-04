@@ -16,6 +16,9 @@
             android:name=".CartActivity"
             android:exported="false" />
         <activity
+            android:name=".ProductTest"
+            android:exported="false" />
+        <activity
             android:name=".AdminPageActivity"
             android:exported="false" />
         <activity

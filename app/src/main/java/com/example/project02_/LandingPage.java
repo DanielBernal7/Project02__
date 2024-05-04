@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.project02_.ProductTest;
 import com.example.project02_.database.AppRepository;
 import com.example.project02_.database.embedded.ProductAndQuantity;
 import com.example.project02_.database.entities.Cart;
@@ -28,6 +29,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import java.util.prefs.BackingStoreException;
 
 public class LandingPage extends AppCompatActivity {
     private ActivityLandingPageBinding binding;
@@ -83,7 +86,8 @@ public class LandingPage extends AppCompatActivity {
         bSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(LandingPage.this, ProductTest.class);
+                startActivity(intent);
             }
         });
 
@@ -142,29 +146,4 @@ public class LandingPage extends AppCompatActivity {
 
 
     }
-
-//    public void addItemsToCart(int userId, List<Integer> productIds, List<Integer> quantities) {
-//        ExecutorService executor = Executors.newSingleThreadExecutor();
-//        Handler handler = new Handler(Looper.getMainLooper());
-//
-//        executor.execute(() -> {
-//            User user = repository.getUserById(userId);
-//            if (user != null) {
-//                for (int i = 0; i < productIds.size(); i++) {
-//                    Product product = repository.getProductById(productIds.get(i));
-//                    if (product != null) {
-//                        Cart cartItem = new Cart();
-//                        cartItem.setUserId(userId);
-//                        cartItem.setProductId(product.getId());
-//                        cartItem.setQuantity(quantities.get(i));
-//                        repository.insertCartItem(cartItem);
-//                    }
-//                }
-//            }
-//            handler.post(() -> {
-//                // Optionally update UI here after items are added
-//            });
-//        });
-//    }
-
 }
