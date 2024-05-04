@@ -9,6 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.project02_.database.entities.Cart;
 import com.example.project02_.database.entities.Product;
 import com.example.project02_.database.entities.User;
 
