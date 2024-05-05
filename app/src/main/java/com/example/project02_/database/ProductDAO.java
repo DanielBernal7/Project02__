@@ -2,6 +2,7 @@ package com.example.project02_.database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -34,5 +35,9 @@ public interface ProductDAO {
 
     @Query("SELECT * FROM products")
     LiveData<List<Product>> getAllProducts();
+    @Delete
+    void delete(Product product);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    Long insert(Product product);
 
 }
