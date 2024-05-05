@@ -16,7 +16,7 @@ import com.example.project02_.database.entities.User;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Product.class, Cart.class}, version = 2, exportSchema = false)
+@Database(entities = {User.class, Product.class, Cart.class}, version = 3, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDAO userDAO();
     public abstract ProductDAO productDAO();

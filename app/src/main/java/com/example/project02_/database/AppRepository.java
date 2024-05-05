@@ -139,10 +139,22 @@ public class AppRepository {
             User user = userDAO.getUserByIdDirectly(userId);
             if(user != null){
                 for(int i = 0; i < productId.size(); i++){
-                    Product product = productDAO.getProductById(productId.get(i));
+                    int currentProductId = productId.get(i);
+                    int quantityToAdd = quantity.get(i);
+                    Product product = productDAO.getProductById(currentProductId);
+//                    Product product = productDAO.getProductById(productId.get(i));
                     if(product != null){
-                        Cart cartItem = new Cart(user.getId(), product.getId(), quantity.get(i));
-                        cartDAO.insert(cartItem);
+                        Cart existingCartItem = cartDAO.getCartItemForUserAndProduct(userId, currentProductId);
+//                        Cart cartItem = new Cart(user.getId(), product.getId(), quantity.get(i));
+                        if (existingCartItem != null) {
+                            existingCartItem.setQuantity(existingCartItem.getQuantity() + quantityToAdd);
+                            cartDAO.updateCartItem(existingCartItem);
+                            Log.d("CartUpdate", "Updated existing cart item with new quantity: " + existingCartItem.getQuantity());
+                        } else {
+                            Cart newCartItem = new Cart(userId, currentProductId, quantityToAdd);
+                            cartDAO.insert(newCartItem);
+                            Log.d("CartInsert", "Inserted new cart item for product ID: " + currentProductId);
+                        }
                     }
                 }
             }
@@ -169,6 +181,17 @@ public class AppRepository {
             e.printStackTrace();
             return -1;
         }
+    }
+
+    public void deleteCartItem(int userId, int productId) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            Cart cartItem = cartDAO.getCartItemForUserAndProduct(userId, productId);
+            if (cartItem != null) {
+                cartDAO.deleteCartItem(cartItem);
+            }
+            executor.shutdown();
+        });
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.project02_.database.entities;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -7,8 +8,11 @@ import androidx.room.PrimaryKey;
 public class Cart {
     @PrimaryKey(autoGenerate = true)
     private int id;
+    @ColumnInfo(name = "userId")
     private int userId;
+    @ColumnInfo(name = "productId")
     private int productId;
+    @ColumnInfo(name = "quantity")
     private int quantity;
 
     public Cart(int userId, int productId, int quantity) {

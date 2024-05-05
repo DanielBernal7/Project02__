@@ -10,8 +10,11 @@ import java.util.Objects;
 public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;
+    @ColumnInfo(name = "username")
     private String username;
+    @ColumnInfo(name = "password")
     private String password;
+    @ColumnInfo(name = "isAdmin")
     private boolean isAdmin;
 
     public User(String username, String password) {

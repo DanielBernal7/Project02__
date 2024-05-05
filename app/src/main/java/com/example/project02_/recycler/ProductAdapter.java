@@ -20,6 +20,7 @@ import com.example.project02_.database.entities.Cart;
 import com.example.project02_.database.entities.Product;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
@@ -92,10 +93,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 //Add product to cart here fo rfuture
                 SharedPreferences sharedPreferences = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
                 int userId = sharedPreferences.getInt("userId", 1);
-                int productId = product.getId();
-
-                Cart newCartItem = new Cart(userId, productId, 1);
-                repository.insertCartItem(newCartItem);
+                repository.addItemsToCart(userId, Collections.singletonList(product.getId()), Collections.singletonList(1));
+//                int productId = product.getId();
+//
+//                Cart newCartItem = new Cart(userId, productId, 1);
+//                repository.insertCartItem(newCartItem);
 
                 Toast.makeText(context, product.getName() + " added to cart!", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
