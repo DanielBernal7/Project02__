@@ -1,6 +1,9 @@
 package com.example.project02_;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,6 +43,23 @@ public class AdminPageActivity extends AppCompatActivity {
 
         viewModel.getAllUsers().observe(this, users -> adapter.updateUsers(users));
 
+        EditText serachEditText = findViewById(R.id.searchEditText);
+        serachEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //I don't think there needs to be anything here
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Or here
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                adapter.getFilter().filter(s.toString());
+            }
+        });
 //        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
 //        recyclerView.addItemDecoration(dividerItemDecoration);
     }

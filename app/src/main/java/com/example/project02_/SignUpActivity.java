@@ -45,6 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
                     SharedPreferences preferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putBoolean("isLoggedIn", true);
+                    editor.putBoolean("isAdmin", newUser.isAdmin());
                     editor.putString("username", username);
                     editor.putInt("userId", (int) userId);
                     editor.apply();
