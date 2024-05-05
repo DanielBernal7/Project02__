@@ -156,4 +156,28 @@ public class AppRepository {
     public LiveData<List<Product>> getAllProducts() {
         return productDAO.getAllProducts();
     }
+    ///
+    public long insertProduct(Product product){
+        try {
+            Future<Long> future = AppDatabase.databaseWriteExecutor.submit(() -> productDAO.insert(product));
+            return future.get();
+        } catch (InterruptedException e){
+            Thread.currentThread().interrupt();
+            e.printStackTrace();
+            return -1;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+
+    public void deleteProductByName(String name) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            Product product = productDAO.getProductByName(name);
+            if (product != null) {
+                productDAO.delete(product);
+            }
+        });
+    }
 }
