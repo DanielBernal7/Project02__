@@ -1,5 +1,6 @@
 package com.example.project02_;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class LandingPage extends AppCompatActivity {
     private AppRepository repository;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +48,7 @@ public class LandingPage extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "user");
         if(!username.isEmpty()){
-            usernameTextView.setText(username);
+            usernameTextView.setText("Welcome, " + username);
         }
 
         boolean isAdmin = sharedPreferences.getBoolean("isAdmin", false);
