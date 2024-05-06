@@ -17,6 +17,9 @@ public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User... user);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(User user);
+
     @Delete
     void deleteUser(User user);
 
@@ -41,4 +44,7 @@ public interface UserDAO {
 
     @Query("SELECT * FROM users WHERE username = :username")
     User getUserByUsernameDirectly(String username);
+
+    @Query("SELECT * FROM users WHERE id = :id")
+    User getUserByIdDirectly(int id);
 }

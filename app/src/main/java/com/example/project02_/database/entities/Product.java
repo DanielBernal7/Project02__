@@ -1,5 +1,6 @@
 package com.example.project02_.database.entities;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,9 +10,13 @@ import java.util.Objects;
 public class Product {
     @PrimaryKey(autoGenerate = true)
     private int id;
+    @ColumnInfo(name = "name")
     private String name;
+    @ColumnInfo(name = "price")
     private double price;
+    @ColumnInfo(name = "description")
     private String description;
+    @ColumnInfo(name = "type")
     private String type;
 
     public Product(String name, double price, String description, String type) {

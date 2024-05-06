@@ -2,11 +2,15 @@ package com.example.project02_.database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.example.project02_.database.embedded.ProductAndQuantity;
 import com.example.project02_.database.entities.Product;
+
+import java.util.List;
 
 @Dao
 public interface ProductDAO {
@@ -25,5 +29,15 @@ public interface ProductDAO {
     @Query("DELETE from products")
     void deleteAll();
 
+    @Query("SELECT * FROM products WHERE id = :id")
+    Product getProductById(int id);
+
+
+    @Query("SELECT * FROM products")
+    LiveData<List<Product>> getAllProducts();
+    @Delete
+    void delete(Product product);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    Long insert(Product product);
 
 }

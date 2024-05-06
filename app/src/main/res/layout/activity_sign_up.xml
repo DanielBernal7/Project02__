@@ -11,18 +11,18 @@
         android:id="@+id/Title_SignUp"
         android:layout_width="250dp"
         android:layout_height="100dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="120dp"
         android:gravity="center"
         android:text="@string/create_account"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintHorizontal_bias="0.354"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/EditTextViewUsername"
-        android:layout_width="250dp"
+        android:layout_width="260dp"
         android:layout_height="32dp"
         android:layout_marginTop="296dp"
         android:background="@drawable/rounded_rectangles"
@@ -38,9 +38,9 @@
 
     <EditText
         android:id="@+id/EditTextPassword"
-        android:layout_width="250dp"
+        android:layout_width="260dp"
         android:layout_height="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="412dp"
         android:background="@drawable/rounded_rectangles"
         android:hint="Enter a password"
         android:imeOptions="actionDone"
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Static_TextViewPassword" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@id/Static_TextViewUserId"
@@ -58,12 +58,12 @@
         android:layout_height="30dp"
         android:layout_marginTop="256dp"
         android:paddingLeft="3dp"
-        android:paddingTop="10dp"
+        android:paddingTop="9dp"
         android:text="@string/usernameStatic"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.306"
+        app:layout_constraintHorizontal_bias="0.287"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,12 +73,12 @@
         android:layout_height="30dp"
         android:layout_marginTop="376dp"
         android:paddingLeft="3dp"
-        android:paddingTop="10dp"
+        android:paddingTop="7dp"
         android:text="@string/password3"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.306"
+        app:layout_constraintHorizontal_bias="0.287"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

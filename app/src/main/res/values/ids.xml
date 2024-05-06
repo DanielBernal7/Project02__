@@ -4,4 +4,5 @@
     <item name="avatarImageView" type="id" />
     <item name="userPasswordTextView" type="id" />
     <item name="Static_TextViewUserId" type="id" />
+    <item name="Static_TextViewPassword" type="id" />
 </resources>

@@ -39,16 +39,22 @@ public class SignUpActivity extends AppCompatActivity {
             User existingUser = repository.getUserByUsernameDirectly(username);
             if (existingUser == null) {
                 User newUser = new User(username, password);
-                repository.insertUser(newUser);
+                long userId = repository.insertUser(newUser);
 
-                SharedPreferences preferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putBoolean("isLoggedIn", true);
-                editor.putString("username", username);
-                editor.apply();
+                if(userId != -1) {
+                    SharedPreferences preferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putBoolean("isLoggedIn", true);
+                    editor.putBoolean("isAdmin", newUser.isAdmin());
+                    editor.putString("username", username);
+                    editor.putInt("userId", (int) userId);
+                    editor.apply();
 
-                Intent intent = new Intent(SignUpActivity.this, LandingPage.class);
-                startActivity(intent);
+                    Intent intent = new Intent(SignUpActivity.this, LandingPage.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(SignUpActivity.this, "Failed to create user", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(SignUpActivity.this, "Username is already being used", Toast.LENGTH_SHORT).show();
             }
