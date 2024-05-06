@@ -41,6 +41,13 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+    testImplementation libs.junit
+    androidTestImplementation libs.junit.v113
+    androidTestImplementation libs.espresso.core.v340
+    testImplementation libs.mockito.core
+    testImplementation libs.core.testing
+    androidTestImplementation libs.runner
+    androidTestImplementation libs.ext.junit
 
     def room_version = "2.6.1"
 
